@@ -3,7 +3,7 @@ import Router from 'next/router'
 import React from 'react'
 import cookie from 'cookie'
 
-const PREVIEW_EXPIRES = 1800;
+const PREVIEW_EXPIRES = 180000
 
 export default class extends React.Component {
   static async getInitialProps({ req, res, query }) {
