@@ -17,6 +17,9 @@ export default class extends React.Component {
           <title>{this.props.title}</title>
           <meta charSet='utf-8' />
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+
+          <link href="/static/images/punch.png" rel="icon" type="image/png" />
 
           <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic" rel="stylesheet" type="text/css" />
           <link href="https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic" rel="stylesheet" type="text/css" />
@@ -48,7 +51,7 @@ export default class extends React.Component {
           <p>Proudly published with <a href="https://prismic.io" target="_blank" rel="noopener">Prismic</a>
             <br/>
             <a href="https://prismic.io" target="_blank" rel="noopener">
-              <img src="/static/images/logo-prismic.svg" className="footer-logo"/>
+              <img src="/static/images/prismic-logo.png" className="footer-logo"/>
             </a>
           </p>
         </footer>

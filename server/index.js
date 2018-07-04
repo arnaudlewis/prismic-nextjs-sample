@@ -12,5 +12,5 @@ app.prepare().then(() => {
   express()
     .use(handler)
     .use(helmet())
-    .listen(3000)
+    .listen(3000, () => process.stdout.write(`Point your browser to: http://localhost:3000\n`));
 })
