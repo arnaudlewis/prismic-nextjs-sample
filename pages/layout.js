@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import { Fragment } from 'react'
-import { client as Prismic } from '../components/prismic'
 import VariableLink from '../components/VariableLink'
 import { Link } from '../routes'
 import PrismicConfig from '../prismic-configuration.json'

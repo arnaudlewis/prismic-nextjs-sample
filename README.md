@@ -8,7 +8,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-To get this project launched you will need to have [Node.js](https://nodejs.org/en/) and `yarn` installed on your local machine.
+To get this project launched you will need to install on your local machine:
+* [Node.js](https://nodejs.org/en/)
+* [yarn](https://yarnpkg.com/lang/en/)
+
+```
+yarn install
+```
 
 ### Installing
 
@@ -28,15 +34,15 @@ You will then be able to open your browser to http://localhost:3000/ to see the 
 
 ## Deployment
 
-You can deploy this project live to a platform as [Heroku](https://www.heroku.com/).
+You can deploy this project live to a platform such as [Heroku](https://www.heroku.com/).
 
-Run the command to build the production version of the website.
+Run the following command to build the production version of the website.
 
 ```
 yarn build
 ```
 
-Run the command to start the production version of the website.
+Run the following command to start the production version of the website.
 
 ```
 yarn start
@@ -44,7 +50,7 @@ yarn start
 
 ## Built With
 
-* [NextJS](https://nextjs.org/) - Static and server‑rendered applications framework.
+* [NextJS](https://nextjs.org/) - a lightweight framework for static and server‑rendered applications.
 * [Prismic](https://prismic.io/) - Headless content management system
 
 ## License

@@ -2,6 +2,7 @@ import React from 'react'
 import { client as Prismic } from '../components/prismic'
 import MainContent from '../components/main'
 import Layout from './layout'
+import Error from './_error';
 
 export default class extends React.Component {
 
@@ -11,12 +12,16 @@ export default class extends React.Component {
   }
 
   render() {
-    return (
-      <Layout title="page" menu={this.props.menu}>
-        <div data-wio-id={this.props.id}>
-          <MainContent sliceZone={this.props.doc.data.page_content}/>
-        </div>
-      </Layout>
-    )
+    if (!doc) {
+      return <Error statusCode={404} />
+    } else {
+      return (
+        <Layout title="page" menu={this.props.menu}>
+          <div data-wio-id={this.props.id}>
+            <MainContent sliceZone={this.props.doc.data.page_content}/>
+          </div>
+        </Layout>
+      )
+    }
   }
 }

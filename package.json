@@ -16,7 +16,7 @@
     "helmet": "^3.12.1",
     "next": "^6.1.0",
     "next-routes": "^1.4.2",
-    "prismic-javascript": "^1.5.0-beta.4",
+    "prismic-javascript": "^1.5.0",
     "prismic-reactjs": "^0.3.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
