@@ -1,6 +1,7 @@
 import App, {Container} from 'next/app'
 import React from 'react'
-import { client as Prismic } from '../components/prismic'
+import { Client } from '../components/prismic'
+import "../assets/stylesheets/main.scss"
 
 export default class extends App {
   static async getInitialProps ({ Component, router, ctx, req }) {
@@ -10,16 +11,16 @@ export default class extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
 
-    const menu = await Prismic(req).getSingle('menu')
+    const layout = await Client(req).getSingle('layout')
 
-    return {pageProps, menu}
+    return {pageProps, layout}
   }
 
   render () {
-    const {Component, pageProps, menu} = this.props
+    const {Component, pageProps, layout} = this.props
     return (
       <Container>
-        <Component {...Object.assign(pageProps, {menu})} />
+        <Component {...Object.assign(pageProps, {layout})} />
       </Container>
     )
   }

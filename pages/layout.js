@@ -1,59 +1,115 @@
 import Head from 'next/head'
-import VariableLink from '../components/VariableLink'
-import { Link } from '../routes'
 import PrismicConfig from '../prismic-configuration.json'
+import { Link } from '../routes'
+import PrismicLink from '../components/PrismicLink'
+import { RichText } from 'prismic-reactjs'
 
 export default class extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      menuOpen: false
+    }
+    this.handleMenuOpen = this.handleMenuOpen.bind(this)
+    this.handleClickMenuItem = this.handleClickMenuItem.bind(this)
+  }
+
+  handleMenuOpen() {
+    this.setState({ menuOpen: !this.state.menuOpen })
+  }
+
+  handleClickMenuItem() {
+    this.setState({ menuOpen: false })
+  }
+
+  renderHead() {
+    return (
+      <Head className={this.props.className}>
+        <title>{RichText.asText(this.props && this.props.title || 'Not Found')}</title>
+        <meta name="description" content={RichText.asText(this.props && this.props.description || '')} />
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="author" content="Prismic"/>
+
+        <link href="/static/images/punch.png" rel="icon" type="image/png" />
+
+        <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet"/>
+        <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous" />
+
+        <link href="/_next/static/style.css" rel="stylesheet" />
+
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.prismic = { endpoint: "${PrismicConfig.apiEndpoint}" }
+        `}} />
+        <script src="//static.cdn.prismic.io/prismic.min.js" />
+      </Head>
+    )
+  }
   render() {
-    const navLinks = this.props.menu.data.menu_links.map(function(item, index){
-      return <li key={index}><VariableLink link={item.link} label={item.label}/></li>
+    const headerItems = this.props.layout.data.header_nav_items.map((item, index) =>
+      <PrismicLink to={item.link} key={index}>
+        <a onClick={this.handleClickMenuItem} className="header-nav-link">{item.text}</a>
+      </PrismicLink>
+    )
+
+    const socialItems = this.props.layout.data.footer_social_items.map((item, index) => {
+      return (
+        <a
+          key={index}
+          className="footer-social-item"
+          href={item.link.url}
+          target={item.link.target || ''}
+          rel={item.link.target ? 'noopener' : ''}
+        >
+          <img src={item.icon.url} alt={item.icon.alt} />
+        </a>
+      )
     })
 
+    const navItems = this.props.layout.data.footer_nav_items.map((item, index) =>
+      <PrismicLink key={index} to={item.link}>
+        <a className="footer-nav-link">{item.text}</a>
+      </PrismicLink>
+    )
     return (
-      <div class={this.props.className}>
-        <Head className={this.props.className}>
-          <title>{this.props.title}</title>
-          <meta charSet='utf-8' />
-          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      <React.Fragment>
+        {this.renderHead()}
+        <div className={`header${this.state.menuOpen ? ' header--is-nav-opened' : ''}`} id="header">
+          <div className="header-inner">
+            <Link to="/">
+              <a className="header-name">{this.props.layout.data.site_name}</a>
+            </Link>
+            <nav className="header-nav">
+              {headerItems}
+            </nav>
+            <div className="header-burger" id="header-burger" onClick={this.handleMenuOpen}>
+              <img className="header-burger-img header-burger-img--closed" src="/static/images/burger-closed.svg" alt="Mobile menu toggle - closed state" />
+              <img className="header-burger-img header-burger-img--opened" src="/static/images/burger-opened.svg" alt="Mobile menu toggle - opened state" />
+            </div>
+          </div>
+        </div>
 
-          <link href="/static/images/punch.png" rel="icon" type="image/png" />
+        <main>
+          {this.props.children}
+        </main>
 
-          <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic" rel="stylesheet" type="text/css" />
-          <link href="https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic" rel="stylesheet" type="text/css" />
-          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
-          <link href="/static/stylesheets/reset.css" rel="stylesheet" />
-          <link href="/static/stylesheets/common.css" rel="stylesheet" />
-          <link href="/static/stylesheets/style.css" rel="stylesheet" />
-
-          <script dangerouslySetInnerHTML={{ __html: `
-            window.prismic = { endpoint: "${PrismicConfig.apiEndpoint}" }
-          `}} />
-          <script src="//static.cdn.prismic.io/prismic.min.js" />
-        </Head>
-
-        <header className="site-header">
-          <Link prefetch route="/">
-            <div className="logo">Example Site</div>
-          </Link>
-          <nav>
-            <ul>
-              {navLinks}
-            </ul>
-          </nav>
-        </header>
-        {this.props.children}
-
-        <footer>
-          <p>Proudly published with <a href="https://prismic.io" target="_blank" rel="noopener">Prismic</a>
-            <br/>
-            <a href="https://prismic.io" target="_blank" rel="noopener">
-              <img src="/static/images/prismic-logo.png" className="footer-logo"/>
-            </a>
-          </p>
+        <footer className="footer">
+          <div className="footer-inner">
+            <div>
+              <p className="footer-name">
+                {this.props.layout.data.site_name}
+              </p>
+              <div className="footer-social-items">
+                {socialItems}
+              </div>
+            </div>
+            <nav className="footer-nav">
+              {navItems}
+            </nav>
+          </div>
         </footer>
-      </div>
+      </React.Fragment>
     )
   }
 }
