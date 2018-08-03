@@ -116,5 +116,8 @@ typings/
 ### Yarn ###
 yarn-error.log
 
+### package lock ###
+package-lock.json
+
 
 # End of https://www.gitignore.io/api/node,macos,visualstudiocode
