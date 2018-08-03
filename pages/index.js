@@ -10,6 +10,22 @@ const graphQuery = `
   homepage {
     ...homepageFields
     body {
+      ... on text_block {
+        non-repeat {
+          ...non-repeatFields
+        }
+        repeat {
+          ...repeatFields
+        }
+      }
+      ... on separator {
+        non-repeat {
+          ...non-repeatFields
+        }
+        repeat {
+          ...repeatFields
+        }
+      }
       ... on cta_banner {
         non-repeat {
           ...non-repeatFields
