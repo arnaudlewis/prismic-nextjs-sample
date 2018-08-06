@@ -20,6 +20,7 @@ export default class extends App {
     const {Component, pageProps, layout} = this.props
     return (
       <Container>
+
         <Component {...Object.assign(pageProps, {layout})} />
       </Container>
     )

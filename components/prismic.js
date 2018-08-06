@@ -1,6 +1,5 @@
-import PrismicLib from 'prismic-javascript'
-import PrismicConfig from '../../prismic-configuration.json'
-import { previewCookie } from 'prismic-javascript'
+import PrismicLib, { previewCookie } from 'prismic-javascript'
+import PrismicConfig from '../prismic-configuration.json'
 
 let frontClient
 

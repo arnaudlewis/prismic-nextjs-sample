@@ -21,12 +21,21 @@ const graphQuery = `{
 
 export default class extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      dialog: false,
+      displayDialog: false
+    }
+
+    this.handleClickAddCart = this.handleClickAddCart.bind(this)
+  }
+
   static async getInitialProps({ req, query }) {
     try {
       const product = await Client(req).getByUID('product', query.uid, { graphQuery })
       return { product }
     } catch(error) {
-      console.error(error)
       return { error: true }
     }
   }
@@ -43,6 +52,11 @@ export default class extends React.Component {
         <p className="products-grid-item-subtitle">{RichText.asText(item.product1.data.sub_title)}</p>
       </div>
     )
+  }
+
+  handleClickAddCart(event) {
+    event.preventDefault()
+    window.alert(`No. Not today.\nWe're integrating the GraphQL API at the moment, so coffee delivery is temporarily unavailable.`)
   }
 
   renderBody() {
@@ -67,7 +81,7 @@ export default class extends React.Component {
                   </div>
                   <div className="product-hero-button-wrapper">
                     <PrismicLink to={this.props.product.data.button_link}>
-                      <a className="a-button a-button--filled">
+                      <a className="a-button a-button--filled" onClick={this.handleClickAddCart}>
                         {RichText.asText(this.props.product.data.button_label)}
                       </a>
                     </PrismicLink>
@@ -110,6 +124,7 @@ export default class extends React.Component {
         </div>
 
         <div data-wio-id={this.props.product.id}></div>
+        {this.state.dialog ? this.renderPopup() : ''}
       </Layout>
     )
   }
