@@ -39,6 +39,6 @@ export default class Error extends React.Component {
   render() {
     if(this.props.statusCode == 404) return this.render404()
     else if(this.props.statusCode >= 500 && this.props.statusCode <= 599) return render500()
-    else renderDefault()
+    else return this.renderDefault()
   }
 }

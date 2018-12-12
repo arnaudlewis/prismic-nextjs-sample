@@ -25,8 +25,8 @@ export default class extends React.Component {
   renderHead() {
     return (
       <Head className={this.props.className}>
-        <title>{RichText.asText(this.props && this.props.title || 'Not Found')}</title>
-        <meta name="description" content={RichText.asText(this.props && this.props.description || '')} />
+        <title>{this.props && this.props.title ? RichText.asText(this.props.title) : 'Not Found'}</title>
+        <meta name="description" content={this.props && this.props.description ? RichText.asText(this.props.description) : ''} />
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="theme-color" content="#000000" />

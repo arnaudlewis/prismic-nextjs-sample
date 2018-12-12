@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server/index.js",
-    "build": "next build",
+    "build": "npx next build",
     "postinstall": "npm run build",
-    "start": "NODE_ENV=production node server/index.js"
+    "start": "NODE_ENV=production node server/index.js",
+    "export": "npx next export"
   },
   "author": "arnaudlewis",
   "license": "ISC",
@@ -21,7 +22,7 @@
     "node-sass": "^4.9.2",
     "prismic-javascript": "^2.0.0-beta.0",
     "prismic-reactjs": "^0.3.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.2"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   }
 }

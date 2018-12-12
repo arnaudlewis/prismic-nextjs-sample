@@ -1,4 +1,4 @@
-import PrismicLib, { previewCookie } from 'prismic-javascript'
+import PrismicLib from 'prismic-javascript'
 import PrismicConfig from '../prismic-configuration.json'
 
 let frontClient
@@ -11,7 +11,6 @@ export const Client = (req = null) => {
   }
 }
 export const Prismic = PrismicLib
-export const PREVIEW_COOKIE = previewCookie
 
 export const linkResolver = doc => {
   if (doc.type  ===  'homepage') return  '/'

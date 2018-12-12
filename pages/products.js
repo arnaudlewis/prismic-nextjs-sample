@@ -9,8 +9,10 @@ export default class extends React.Component {
 
   static async getInitialProps({ req }) {
     try {
-      const productsDocument = await Client(req).getSingle('products')
-      const productList = await Client(req).query(Prismic.Predicates.at('document.type', 'product'), { pageSize: 50 })
+      // to differentiate front and back, the cookie header is used in prismic-javascript for previews otherwise it takes the cookies from the browser
+      const request = req && req.headers ? req : null
+      const productsDocument = await Client(request).getSingle('products')
+      const productList = await Client(request).query(Prismic.Predicates.at('document.type', 'product'), { pageSize: 50 })
       return { productsDocument, productList: productList.results }
     } catch(error) {
       console.log(error)
